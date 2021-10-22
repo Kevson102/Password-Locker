@@ -12,6 +12,12 @@ class TestUsers(unittest.TestCase):
         Setup method to run before each test case.
         '''
         self.new_user = Users("Kevson", "CsGitituComp")
+        
+    def tearDown(self):
+        '''
+        Method that cleans up after every test case
+        '''
+        Users.user_list = []
     
     def test_init(self):
         '''
