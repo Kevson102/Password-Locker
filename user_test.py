@@ -25,7 +25,16 @@ class TestUsers(unittest.TestCase):
         test_save_user test case for testing if the user object is saved in the user list.
         '''
         self.new_user.save_user() #Saving the new user
-        self.assertEqual(len(Users.user),1) # Checks whether the length of the user_list increases by 1 after the saving
+        self.assertEqual(len(Users.user_list),1) # Checks whether the length of the user_list increases by 1 after the saving
+        
+    def test_save_multiple_users(self):
+        '''
+        Test_save _multiple_users to check if we can save multiple user objects in the user-list
+        '''
+        self.new_user.save_user()
+        test_user = Users("Josephine", "2563254") #New user registered
+        test_user.save_user()
+        self.assertEqual(len(Users.user_list), 2)
         
     if __name__ == '__main__':
         unittest.main()
