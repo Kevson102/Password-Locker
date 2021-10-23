@@ -63,6 +63,12 @@ def display_all_saved_credentials():
     Function that displays all the saved login credentials.
     '''
     return Credentials.display_all_credentials()
+def auto_generate_password(passwordlength):
+    '''
+    Function that autogenerates a password of the required length.
+    '''
+    auto_password = Credentials.autogenerate_password(passwordlength)
+    return auto_password
 ##################################################################################################
 # The main function begins here
 def main():
@@ -145,7 +151,24 @@ def main():
                             
                             print("Login Password")
                             print("-"*14)
-                            login_password = input()
+                            
+                            print("Would you like to creat your own password or would you like to auto-generate one?")
+                            print("CP ========================> Create Password")
+                            print("AG ========================> Auto-Generate")
+                            while True:
+                                option = input().upper().strip()
+                                if option == "CP":
+                                    print("Create a password")
+                                    print("-"*15)
+                                    login_password = input()
+                                elif option == "AG":
+                                    passwordlength = int(input("Please enter the Desired password Length: \n"))
+                                    login_password = auto_generate_password(passwordlength)
+                                    print(f"Your auto-generated password is: {login_password} \n Press 'Enter' to continue")
+                                    # break
+                                else:
+                                    print("I really did not get that. please use the instructed shortcodes.")
+                                    break
                             print("\n")
                             
                             save_credential(add_credential(platform, login_username, login_password))
@@ -158,7 +181,7 @@ def main():
                                 print("-"*45)
                                 print("\n")
                                 for credential in display_all_saved_credentials():
-                                    print(f"Platform Name: {credential.platform}...Username: {credential.login_username}...Password{credential.login_password}")
+                                    print(f"Platform Name: {credential.platform}...Username: {credential.login_username}...Password: {credential.login_password}")
                             else:
                                 print("You dont seem to have any credentials saved yet")
                                 print("\n")
@@ -196,6 +219,9 @@ def main():
         elif short_code == "EX":              
             print("Good Bye.....")
             break
+        else:
+            print("I really did not get that. Please use the given short codes")
+            print("\n")
                         
 
 if __name__ == '__main__':
