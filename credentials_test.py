@@ -65,5 +65,11 @@ class TestCredentials(unittest.TestCase):
         credential_exists = Credentials.credential_exist("Gmail")
         self.assertTrue(credential_exists)
         
+    def test_display_all_credentials(self):
+        '''
+        Method that returns a list of all the saved credentials.
+        '''
+        self.assertEqual(Credentials.display_all_credentials(),Credentials.credential_list)
+        
 if __name__ == '__main__':
     unittest.main()
