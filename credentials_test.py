@@ -65,6 +65,17 @@ class TestCredentials(unittest.TestCase):
         credential_exists = Credentials.credential_exist("Gmail")
         self.assertTrue(credential_exists)
         
+    def test_find_credential_by_platform(self):
+        '''
+        Test to check if we can find a credential by platform name and display the username and password for the platform.
+        '''
+        self.new_credential.save_credential()
+        test_credential = Credentials("Gmail", "Kevson102@gmail.com", "11223344")
+        test_credential.save_credential()
+        
+        found_credential = Credentials.find_credential_by_platform("Gmail")
+        self.assertEqual(found_credential.login_username, test_credential.login_username)
+        
     def test_display_all_credentials(self):
         '''
         Method that returns a list of all the saved credentials.

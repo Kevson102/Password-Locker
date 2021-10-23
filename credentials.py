@@ -47,3 +47,16 @@ class Credentials:
         Method that returns the credentials list.
         '''
         return cls.credential_list
+    
+    @classmethod
+    def find_credential_by_platform(cls, platform):
+        '''
+        Method that takes in a platform name and returns the credentials that match the platform name.
+        Args:
+            platform: The name of the platform whose credential we are searching
+        Returns:
+            login credentials associated with that platform.
+        '''
+        for credential in cls.credential_list:
+            if credential.platform == platform:
+                return credential
