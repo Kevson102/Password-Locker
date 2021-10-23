@@ -73,25 +73,26 @@ def main():
         print("Use the following short-code commands for easy navigation")
         print("lg -------------- Login")
         print("EX -------------- Exit application")
-        print("\n")
-        print("\n")
+
         short_code = input().upper()
+        print("\n")
         if short_code == "LG":
             print("Do you have an account? (y/n)")
-            print("\n")
-            print("\n")
-            account_status = input().upper()
+
+            account_status = input().upper().strip()
             if account_status == "N":
-                print("Please create an account to use the application")
+                print("Please create an account to login and use the application")
                 print("\n")
                 
                 print("Username")
                 print("-"*8)
                 username = input()
+                print("\n")
                 
                 print("Password")
                 print("-"*8)
                 password = input()
+                print("\n")
                 
                 save_user(register_user(username, password)) # Creates and saves the user login record
                 print("Account created successfully")
@@ -99,22 +100,103 @@ def main():
             else:
                 print("Login with you credentials")
                 print("\n")
-                print("\n")
                 
                 print("Username")
                 print("-"*8)
                 username = input()
                 print("\n")
-                print("\n")
                 
                 print("Password")
                 print("-"*8)
                 password = input()
+                print("\n")
                 if check_existing_users(username, password) == False:
                     print("Incorrect username or password.")
-                    break
+                    print("\n")
+                    print("\n")
+                    # break
                 else:
                     print("Login Successful")
+                    while True:
+                        print("\n")
+                        print("use the following short-codes to navigate through the application")
+                        print("CC   ====================> Create a new Credential")
+                        print("sc   ====================> Search for platform Credential")
+                        print("DC   ====================> Display all Credentials")
+                        print("DelC ====================> Delete a Credential")
+                        print("LO   ====================> Log Out")
+                        print("\n")
+                        print("What would you like to do? Please use the short-codes provided above.")
+                        shortcode = input().upper()
+                        print("\n")
+                        if shortcode == "CC":
+                            print("Create a login credential")
+                            print("-"*25)
+                            
+                            print("Platform name")
+                            print("-"*13)
+                            platform = input()
+                            print("\n")
+                            
+                            print("Login Username/Email")
+                            print("-"*14)
+                            login_username = input()
+                            print("\n")
+                            
+                            print("Login Password")
+                            print("-"*14)
+                            login_password = input()
+                            print("\n")
+                            
+                            save_credential(add_credential(platform, login_username, login_password))
+                            print("\n")
+                            print(f"Login credentials for your {platform} account have been created and saved.")
+                            
+                        elif shortcode == "DC":
+                            if display_all_saved_credentials():
+                                print("Here is a list of all credentials in storage")
+                                print("-"*45)
+                                print("\n")
+                                for credential in display_all_saved_credentials():
+                                    print(f"Platform Name: {credential.platform}...Username: {credential.login_username}...Password{credential.login_password}")
+                            else:
+                                print("You dont seem to have any credentials saved yet")
+                                print("\n")
+                                
+                        elif shortcode == "SC":
+                            print("Enter the name of the platform you wish to search for")
+                            search_platform = input()
+                            if check_existing_credentials(search_platform):
+                                search_credential = find_credential(search_platform)
+                                print("Here is the credential you are searching for")
+                                print("-"*45)
+                                print(f"{search_credential.platform} {search_credential.login_username} {search_credential.login_password}")
+                            else:
+                                print(f"Credentials for {search_platform} are yet to be created")
+                                
+                        elif shortcode == "DELC":
+                            print("Enter the name of the platform whose credentials you wish to delete")
+                            delete_data = input()
+                            if check_existing_credentials(delete_data):
+                                to_delete = find_credential(delete_data)
+                                to_delete.delete_credential()
+                                print(f"The login credentials for {delete_data} have been deleted")
+                                print("\n")
+                                #print("Please confirm your delete request")
+                            else:
+                                print("No such credential exists in memory")
+                        
+                        elif shortcode == "LO":
+                            print("Thank you for using password locker. See you next time")
+                            break
+                        else:
+                            print("I really did not get that. Please use the indicated short codes")
+                            
+                            
+        elif short_code == "EX":              
+            print("Good Bye.....")
+            break
+                        
 
 if __name__ == '__main__':
     main()
