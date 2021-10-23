@@ -78,6 +78,7 @@ def main():
                 password = input()
                 if check_existing_users(username, password) == False:
                     print("Incorrect username or password.")
+                    break
                 else:
                     print("Login Successful")
 
