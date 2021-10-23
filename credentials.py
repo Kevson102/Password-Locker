@@ -15,3 +15,8 @@ class Credentials:
         self.login_username = login_username
         self.login_password = login_password
         
+    def save_credential(self):
+        '''
+        This method saves the credential object in the credential_list.
+        '''
+        Credentials.credential_list.append(self)
