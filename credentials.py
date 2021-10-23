@@ -1,3 +1,6 @@
+import string
+import random
+
 class Credentials:
     '''
     Class that generates a new instance of login credentials
@@ -60,3 +63,11 @@ class Credentials:
         for credential in cls.credential_list:
             if credential.platform == platform:
                 return credential
+    
+    def autogenerate_password(passwordlength):
+        '''
+        Method that generates a random password with letters, numbers, and special characters.
+        '''
+        random_password = string.ascii_lowercase + string.ascii_uppercase + string.digits + "#%^&~!@$"
+        for i in range(passwordlength):
+            return ''.join(random.choice(random_password))
