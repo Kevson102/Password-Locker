@@ -26,3 +26,17 @@ class Credentials:
         Method that deletes a saved login credential from the credential list.
         '''
         Credentials.credential_list.remove(self)
+        
+    @classmethod
+    def credential_exist(cls, platform):
+        '''
+        Method for checking if a credential exists in the credentials list.
+        Args:
+            platform: The online platform for which we need credentials for
+        Returns:
+            Boolean: True or False depending on whether the credential exists.
+        '''
+        for credential in cls.credential_list:
+            if credential.platform == platform:
+                return True
+        return False

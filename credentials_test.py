@@ -54,7 +54,16 @@ class TestCredentials(unittest.TestCase):
         self.new_credential.delete_credential()
         self.assertEqual(len(Credentials.credential_list),1)
         
-
+    def test_credential_exists(self):
+        '''
+        Test case to check if a credential exist
+        '''
+        self.new_credential.save_credential()
+        test_credential = Credentials("Gmail", "Kevson102@gmail.com", "11223344")
+        test_credential.save_credential()
+        
+        credential_exists = Credentials.credential_exist("Gmail")
+        self.assertTrue(credential_exists)
         
 if __name__ == '__main__':
     unittest.main()
