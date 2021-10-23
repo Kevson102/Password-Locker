@@ -61,11 +61,11 @@ class TestUsers(unittest.TestCase):
         test_user = Users("Josephine", "2563254") #New user registered
         test_user.save_user()
         
-        user_exists = Users.user_exist("Josephine")
-        
+        user_exists = Users.user_exist("Josephine","2563254")
         self.assertTrue(user_exists)
-
         
+        # user_password_exists = Users.user_password_exist("Josephine")
+        # self.assertTrue(user_password_exists)
         
         
     if __name__ == '__main__':
