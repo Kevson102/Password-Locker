@@ -64,8 +64,6 @@ class TestUsers(unittest.TestCase):
         user_exists = Users.user_exist("Josephine","2563254")
         self.assertTrue(user_exists)
         
-        # user_password_exists = Users.user_password_exist("Josephine")
-        # self.assertTrue(user_password_exists)
         
         
     if __name__ == '__main__':
