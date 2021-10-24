@@ -1,7 +1,16 @@
 #!/usr/bin/env python3.8
+# from termcolor import colored
+# import pyautogui
 from user import Users
 from credentials import Credentials
-
+def function():
+	print("               ____                         _____  _                               ")
+	print("              |  _ \                       / ____|| |                              ")
+	print("              | |_) )  ____  ___   ___    / ____  | |__    _____  _ _  ____        ")
+	print("              |  __/  / _  |/ __  / __    \___  \ |  __)  /  _  \| '_|/ __ \       ")
+	print("              | |    / (_| |\__ \ \__ \    ___  / | |___ (  (_)  ) | |  ___/       ")
+	print("              |_|    \_____| ___/  ___/   |____/  |_____) \_____/|_|  \____        ")
+function()
 def register_user(username, password):
     '''
     Function that creates a new user.
@@ -72,13 +81,12 @@ def auto_generate_password(passwordlength):
 ##################################################################################################
 # The main function begins here
 def main():
-    print("Hello There! Welcome to the Safest Password Locker")
-    print("\n")
+    print ('Hello There! Welcome to the Safest Password Locker', 'red')
     print("\n")
     while True:
         print("Use the following short-code commands for easy navigation")
-        print("lg -------------- Login")
-        print("EX -------------- Exit application")
+        print("lg --------------> Login")
+        print("EX --------------> Exit application")
 
         short_code = input().upper()
         print("\n")
@@ -102,6 +110,7 @@ def main():
                 
                 save_user(register_user(username, password)) # Creates and saves the user login record
                 print("Account created successfully")
+                print("\n")
                 
             else:
                 print("Login with you credentials")
@@ -116,6 +125,9 @@ def main():
                 print("-"*8)
                 password = input()
                 print("\n")
+            # else:
+            #     print("I really did not get that. Please use Y/N")
+                
                 if check_existing_users(username, password) == False:
                     print("Incorrect username or password.")
                     print("\n")
@@ -133,7 +145,7 @@ def main():
                         print("LO   ====================> Log Out")
                         print("\n")
                         print("What would you like to do? Please use the short-codes provided above.")
-                        shortcode = input().upper()
+                        shortcode = input().upper().strip()
                         print("\n")
                         if shortcode == "CC":
                             print("Create a login credential")
@@ -145,7 +157,7 @@ def main():
                             print("\n")
                             
                             print("Login Username/Email")
-                            print("-"*14)
+                            print("-"*20)
                             login_username = input()
                             print("\n")
                             
@@ -161,6 +173,7 @@ def main():
                                     print("Create a password")
                                     print("-"*15)
                                     login_password = input()
+                                    print("Press enter to continue")
                                 elif option == "AG":
                                     passwordlength = int(input("Please enter the Desired password Length: \n"))
                                     login_password = auto_generate_password(passwordlength)
@@ -168,7 +181,7 @@ def main():
                                     # break
                                 else:
                                     print("I really did not get that. please use the instructed shortcodes.")
-                                    break
+                                    # break
                             print("\n")
                             
                             save_credential(add_credential(platform, login_username, login_password))
@@ -181,21 +194,24 @@ def main():
                                 print("-"*45)
                                 print("\n")
                                 for credential in display_all_saved_credentials():
-                                    print(f"Platform Name: {credential.platform}...Username: {credential.login_username}...Password: {credential.login_password}")
+                                    print(f"Platform Name: {credential.platform}      Username: {credential.login_username}      Password: {credential.login_password}")
                             else:
                                 print("You dont seem to have any credentials saved yet")
                                 print("\n")
                                 
                         elif shortcode == "SC":
                             print("Enter the name of the platform you wish to search for")
+                            print("\n")
                             search_platform = input()
                             if check_existing_credentials(search_platform):
                                 search_credential = find_credential(search_platform)
-                                print("Here is the credential you are searching for")
+                                print("Here is the login credential you are searching for")
                                 print("-"*45)
-                                print(f"{search_credential.platform} {search_credential.login_username} {search_credential.login_password}")
+                                print(f"Platform name: {search_credential.platform}      Login Username/email: {search_credential.login_username}      Login password: {search_credential.login_password}")
+                                
                             else:
                                 print(f"Credentials for {search_platform} are yet to be created")
+                                print("\n")
                                 
                         elif shortcode == "DELC":
                             print("Enter the name of the platform whose credentials you wish to delete")
